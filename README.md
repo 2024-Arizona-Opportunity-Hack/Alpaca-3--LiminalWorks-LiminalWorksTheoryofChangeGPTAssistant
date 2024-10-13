@@ -1,5 +1,5 @@
 
-# Team-3: Alpaca 3
+# Team-24: Alpaca 3
 
 [Demo Video](https://www.youtube.com/watch?v=DHfRfU3XUEo&ab_channel=FailArmy)</br>
 [Devpost](devpost.com)
