@@ -1,7 +1,7 @@
 
 # Team-24: Alpaca 3
 
-[Demo Video]([https://www.youtube.com/watch?v=DHfRfU3XUEo&ab_channel=FailArmy](https://youtu.be/UY_XMJl0DD4))</br>
+[Demo Video]((https://youtu.be/UY_XMJl0DD4))</br>
 [Devpost](devpost.com)
 
 # Team Members
