@@ -1,3 +1,5 @@
+#export PATH=$PATH:/Users/justinlee/Library/Python/3.9/bin
+
 import os
 import json
 import pickle
