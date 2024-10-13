@@ -1,6 +1,7 @@
 import pdfplumber
 from PyPDF2 import PdfReader
 import re
+import mongodData
 
 pdf_file_path = 'standard.pdf'
 
@@ -109,11 +110,6 @@ def check_type_of_pdf(raw_text):
     query=[]
     if rquestions[0] in text:
         ranswers = extract_answer_from_pdf(text)
-        # print(ranswers)
-        # if len(rquestions) != len(ranswers):
-        #     rpt="Error in pdf upload or few questions are unanswered"
-        #     query.append(rpt)
-        # else:
         for question,ranswer in zip(rquestions,ranswers):
             rpt=tocpdfprompt+question+"answer:"+ranswer
             query.append(rpt)

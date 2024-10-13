@@ -3,6 +3,7 @@ import fetchData
 import pdfplumber
 from io import BytesIO
 
+
 app = Flask(__name__)
 
 @app.route('/analyze-pdf', methods=['POST'])

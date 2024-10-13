@@ -10,11 +10,13 @@ import os
 from PyPDF2 import PdfReader
 from createpdf import create_pdf
 from pdfcontentreader import check_type_of_pdf
+import maindb
+import mongodData
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 api_key = "YOUR_KEY"
-gapi_key="YOUR KEY"
+gapi_key="YOUR_KEY"
 openai.api_key=api_key
 # Initialize the embedding model
 model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -79,6 +81,8 @@ def get_gpt_ans(retrieved_chunks, user_question):
     response = response.choices[0].message.content
     return response
 
+maindb.save_vector_db()
+
 index, metadata = load_vector_db()
 
 def analyze_question(question):
@@ -87,6 +91,11 @@ def analyze_question(question):
         retrieved_chunks = query_vector_db(index, metadata, user_question,5)
         summarized_chunks = summarize_chunks(retrieved_chunks)
         res=get_gpt_ans(summarized_chunks, user_question)
+        data = {
+                "query": user_question,
+                "response": res
+        }
+        mongodData.insert_data_to_database(data)
         return res
 
 # Main function to demonstrate querying
@@ -100,6 +109,11 @@ def analyze_pdf(raw_text):
             user_question=query
             retrieved_chunks = query_vector_db(index, metadata, user_question,2)
             res=get_gpt_ans(retrieved_chunks, user_question)
+            data = {
+                "query": user_question,
+                "response": res
+            }
+            mongodData.insert_data_to_database(data)
             qr=[user_question, res]
             contentarr.append(qr)
         content_gen(contentarr)
