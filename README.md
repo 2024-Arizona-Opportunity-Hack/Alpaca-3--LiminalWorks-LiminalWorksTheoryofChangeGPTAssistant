@@ -61,7 +61,12 @@ once we got it working, we were all relieved and happy.
 ## What we learned
 
 It was some of our first times working with AI/machine learning and databses, and for one of us, it was our first time coding. We learned a lot about
-creating programs with these features
+creating programs with these features. The system uses multiple technologies in order to fulfill the problem statement. These technologies include, but not limited to :
+1. MongoDB NoSQL Database
+2. Natural Language Processing (NLP) and Artificial Intelligence (AI) techniques like Retrieval Augmented Generation (RAG) model
+3. Open source python frontend framework like Streamlit
+4. Web Scraping technologies and libraries BeautifulSoup
+   
 
 
 
