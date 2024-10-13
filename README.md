@@ -44,7 +44,7 @@ directly ask Alpaca 3 questions they have, or they can upload pdfs that the AI w
 
 The user writes text or uploads a pdf, and this input is then sent as a query to the API gpt that generates a response. 
 The response is filtered through a database containing data about TOC. If the response relates to TOC, the AI response
-is let through. If not, the AI responds with how the query is not relevant to TOC.
+will let it through. If not, the AI responds with how the query is not relevant to TOC. Every conversation is collected and stored in the database for future reference and training where it learns from past conversations.
 
 <img width="3136" alt="Flow Map" src="https://github.com/user-attachments/assets/52570d3a-185b-4f86-861a-5573b8be203b">
 
@@ -53,15 +53,14 @@ is let through. If not, the AI responds with how the query is not relevant to TO
 # Challenges we ran into
 
 We had some difficulties determining what makes a good theory of change and how to develop one and how an AI would be able to determine this as well. 
-The data provided to train the model was very limited, so we had to solve this problem by manually training our model with other resources. Our front-end
-and back-end could have used more communication because system integration proved to be a challenge.
+The data provided to train the model was very limited, so we had to solve this problem by manually training our model with other resources. For data collection, we had to scrape the internet for resources containing the keyword "Theory of Change". Our front-end and back-end could have used more communication because system integration proved to be a challenge.
 
 
 
 # Accomplishments we are proud of
 
 System integration was an accomplishment we are proud of. It was difficult to get the front-end and back-end to work together seamlessly, but 
-once we got it working, we were all relieved and happy.
+once we got it working, we were all relieved and happy. In addition, all the answers to the questions are accurate an precise which means the project satisfies the problem statement.
 
 # What we learned
 
@@ -71,5 +70,6 @@ creating programs with these features. The system uses multiple technologies in 
 2. Natural Language Processing (NLP) and Artificial Intelligence (AI) techniques like Retrieval Augmented Generation (RAG) model
 3. Open source python frontend framework like Streamlit
 4. Web Scraping technologies and libraries like BeautifulSoup
+5. Collaboration between teammates and getting things done in a time crunch
    
 
