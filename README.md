@@ -46,6 +46,7 @@ The user writes text or uploads a pdf, and this input is then sent as a query to
 The response is filtered through a database containing data about TOC. If the response relates to TOC, the AI response
 is let through. If not, the AI responds with how the query is not relevant to TOC.
 
+<img width="3136" alt="Flow Map" src="https://github.com/user-attachments/assets/b41d4abc-ad33-4932-9293-e7d139b72b86">
 
 
 # Challenges we ran into
