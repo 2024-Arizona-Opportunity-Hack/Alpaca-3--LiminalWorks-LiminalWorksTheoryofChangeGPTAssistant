@@ -1,3 +1,4 @@
+#This script will ask the user wether they want answer the questions manually or upload pdf, it will extract the questions & answers then link them in a dictionary
 import pdfplumber
 import re  # Import the re module for regex
 
