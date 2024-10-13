@@ -76,9 +76,9 @@ def read_pdf(file):
     return allText    
 
 #file upload
-df = st.file_uploader("Upload your file",
+df = st.sidebar.file_uploader("Upload your file",
     type = ["pdf"])
-if st.button("Analyze"):
+if st.sidebar.button("Analyze"):
     if df is not None:
         raw_text = read_pdf(df)
         st.session_state.messages.append({"role": "user", "content": raw_text})
