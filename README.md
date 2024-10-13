@@ -1,50 +1,68 @@
 
-# 2024_fall Hackathon Project
+# Team-3: Alpaca 3
 
-## Quick Links
-- [Hackathon Details](https://www.ohack.dev/hack/2024_fall)
-- [Team Slack Channel](https://opportunity-hack.slack.com/app_redirect?channel=alpaca_3_laminal_works)
-- [Nonprofit Partner](https://ohack.dev/nonprofit/UxkOY4WtUiyWCnakdE1W)
-- [Problem Statement](https://ohack.dev/project/OOAC8B1GvLTCb97FKlCF)
+[Demo Video](https://www.youtube.com/watch?v=DHfRfU3XUEo&ab_channel=FailArmy)</br>
+[Devpost](devpost.com)
 
-## Creator
-@ramy Babaghayou (on Slack)
+## Team Members
+Justin Lee - Front End </br>
+Dheeraj Kallakuri - Full Stack </br>
+Ramy Bagaghayou - </br>
+Umang Rajnikant Bid - Back End
 
-## Team "Alpaca 3 "
-- [Team Member 1](GitHub profile link)
-- [Team Member 2](GitHub profile link)
-- [Team Member 3](GitHub profile link)
-<!-- Add all team members -->
+## Info
 
-## Project Overview
-Brief description of your project and its goals.
+[Our Slack](https://opportunity-hack.slack.com/app_redirect?channel=alpaca_3_laminal_works)</br>
+[About Liminal Works](https://ohack.dev/nonprofit/UxkOY4WtUiyWCnakdE1W)</br>
 
-## Tech Stack
-- Frontend: 
-- Backend: 
-- Database: 
-- APIs: 
-<!-- Add/modify as needed -->
+## Problem Statement
 
+Liminal Works currently enlists the help of its volunteers to develop theories of change for grassroot activists and organizations. 
+This task can be very time-consuming and subjective. Using AI to facilitate this process, the time spent developing theories
+of change is significantly reduced, allowing for volunteers and employees to allocate their time to more important tasks.
 
-## Getting Started
-Instructions on how to set up and run your project locally.
+## Introduction
 
-```bash
-# Example commands
-git clone [your-repo-link]
-cd [your-repo-name]
-npm install
-npm start
-```
+Alpaca 3 is an AI model trained on data about theory of change (TOC), what makes a good TIC, and how to craft a TOC. Users are able to 
+directly ask Alpaca 3 questions they have, or they can upload pdfs that the AI will scan and respond to. 
 
 
-## Your next steps
-1. ✅ Add everyone on your team to your GitHub repo like [this video posted in our Slack channel](https://opportunity-hack.slack.com/archives/C1Q6YHXQU/p1605657678139600)
-2. ✅ Create your DevPost project [like this video](https://youtu.be/vCa7QFFthfU?si=bzMQ91d8j3ZkOD03)
-3. ✅ Use the [2024 DevPost](https://opportunity-hack-2024-arizona.devpost.com) to submit your project
-4. ✅ Your DevPost final submission demo video should be 4 minutes or less
-5. ✅ Review the judging criteria on DevPost
+
+## How it works
+
+The user writes text or uploads a pdf, and this input is then sent as a query to the API gpt that generates a response. 
+The response is filtered through a database containing data about TOC. If the response relates to TOC, the AI response
+is let through. If not, the AI responds with how the query is not relevant to TOC.
+
+
+
+
+## Challenges we ran into
+
+
+
+
+
+## Accomplishments we are proud of
+
+
+
+## What we learned
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # What should your final Readme look like?
 Your readme should be a one-stop-shop for the judges to understand your project. It should include:
