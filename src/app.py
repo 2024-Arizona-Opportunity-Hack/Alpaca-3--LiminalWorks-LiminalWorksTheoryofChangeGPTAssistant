@@ -1,13 +1,12 @@
 import os
 import json
-
+import pandas as pd
 from openai import OpenAI
 import streamlit as st
 
 
 #set page title
 st.title("Alpaca 3")
-
 
 #config api key
 working_dir = os.path.dirname(os.path.abspath(__file__))
@@ -41,7 +40,7 @@ if user_input := st.chat_input("Enter message:"):
         result = ""
         full_response = ""
         
-        #openai.chat.completion.create
+        #create a response for user input
         for response in client.chat.completions.create(
             model=st.session_state["openai_model"],
             messages=[
@@ -51,16 +50,17 @@ if user_input := st.chat_input("Enter message:"):
             stream=True,
         ):
             
-        #full_response += response.choices[0].delta.get("content", "")
+            #get the response from gpt model
             result = response.choices[0].delta.content
             if(isinstance(result, str)):
                 full_response += result
             
             message_placeholder.markdown(full_response + "▌")
 
+    #add message to history
     st.session_state.messages.append(
         {"role": "assistant", "content": full_response})
-            
+    #remove the ▌ thingy
     message_placeholder.markdown(full_response)
 
 
