@@ -1,149 +1,81 @@
-import os
-import json
-import pickle
-import streamlit_authenticator as stauth
+import requests
 import streamlit as st
-from pathlib import Path
-from openai import OpenAI
-from pypdf import PdfReader
+import pdfplumber
 
-names = ["Bobbert"]
-users = ["Bobby"]
+def read_pdf(file):
+    text = ""
+    with pdfplumber.open(file) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text()
+    return text
 
-#load hashed passwords
-file_path = Path(__file__).parent / "hashed_pws.pk1"
-with file_path.open("rb") as file:
-    hashed_passwords = pickle.load(file)
+def analyze_pdf_via_api(file):
+    # Send the file to the Flask backend API
+    files = {"file": file}
+    response = requests.post("http://127.0.0.1:5000/analyze-pdf", files=files)
 
-authenticator = stauth.Authenticate(names, users, hashed_passwords,
-    "alpaca_3", "12345678", cookie_expiry_days=30)
+    if response.status_code == 200:
+        return response.json().get("result")
+    else:
+        st.error("Error: " + response.json().get("error", "Unknown error occurred"))
+        return None
 
-name, authentication_status, user = authenticator.login("Login", "main")
+def ask_question_via_api(question):
+    # Send the user question to the Flask backend API
+    data = {"question": question}
+    response = requests.post("http://127.0.0.1:5000/ask-question", json=data)
 
-if authentication_status == False:
-    st.error("Username/password is incorrect")
+    if response.status_code == 200:
+        return response.json().get("response")
+    else:
+        st.error("Error: " + response.json().get("error", "Unknown error occurred"))
+        return None
 
-if authentication_status == None:
-    st.warning("Please enter your username and password")
+# Initialize session state for messages if it doesn't exist
+if "messages" not in st.session_state:
+    st.session_state["messages"] = []
 
-if authentication_status:
+st.title("Alpaca 3 - Liminal Works")
 
-    authenticator.logout("Logout", "sidebar")
-    #set page title
-    st.title("Alpaca 3")
-
-    #config api key
-    working_dir = os.path.dirname(os.path.abspath(__file__))
-    config_data = json.load(open(f"{working_dir}/config.json"))
-    client = OpenAI(
-        api_key = config_data["OPENAI_API_KEY"]
-    )
-
-    if "openai_model" not in st.session_state:
-        st.session_state["openai_model"] = "gpt-3.5-turbo"
-
-    print(st.session_state["openai_model"])  # Debugging
-
-    #initialize chat session if no previous session exists
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-
-    #display chat history
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-    #take user input
-    if user_input := st.chat_input("Enter message:"):
-        st.session_state.messages.append({"role": "user", "content": user_input})
-        st.chat_message("user").markdown(user_input)
-
-
-        with st.chat_message("assistant"):
-            message_placeholder = st.empty()
-            result = ""
-            full_response = ""
-            
-            #create a response for user input
-            for response in client.chat.completions.create(
-                model=st.session_state["openai_model"],
-                messages=[
-                    {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state.messages
-                ],
-                stream=True,
-            ):
+# File upload in the sidebar
+df = st.sidebar.file_uploader("Upload your PDF file", type=["pdf"])
+if st.sidebar.button("Analyze"):
+    if df is not None:
+        with st.spinner("Analyzing your PDF..."):
+            response = analyze_pdf_via_api(df)
+            if response:
+                # Add the response to the session state messages
+                st.session_state.messages.append({"role": "assistant", "content": response})
                 
-                #get the response from gpt model
-                result = response.choices[0].delta.content
-                if(isinstance(result, str)):
-                    full_response += result
+                # Display chat messages from the session state
+                for message in st.session_state.messages:
+                    st.chat_message(message["role"]).markdown(message["content"])
+
+# User question input
+user_question = st.text_input("Ask a question about the PDF content:")
+
+# Button to trigger user question analysis
+if st.button("Submit Question"):
+    if user_question.strip() != "":
+        with st.spinner("Fetching the response..."):
+            response = ask_question_via_api(user_question)
+            if response:
+                # Add the user input and response to the session state messages if they don't already exist
+                if not any(msg["content"] == user_question and msg["role"] == "user" for msg in st.session_state.messages):
+                    st.session_state.messages.append({"role": "user", "content": user_question})
                 
-                message_placeholder.markdown(full_response + "▌")
+                if not any(msg["content"] == response and msg["role"] == "assistant" for msg in st.session_state.messages):
+                    st.session_state.messages.append({"role": "assistant", "content": response})
 
-        #add message to history
-        st.session_state.messages.append(
-            {"role": "assistant", "content": full_response})
-        #remove the ▌ thingy
-        message_placeholder.markdown(full_response)
+# Keep the chat visible all the time
+for message in st.session_state.messages:
+    if message["role"] == "user":
+        st.chat_message("user").markdown(f"**You:** {message['content']}")
+    else:
+        st.chat_message("assistant").markdown(f"**Alpaca 3:** {message['content']}")
 
-    def read_pdf(file):
-        allText = ""
-        pdfReader = PdfReader(file)
-        for i in range(len(pdfReader.pages)):
-            page = pdfReader.pages[i]
-            allText += page.extract_text()
-
-        return allText    
-
-    #file upload
-    df = st.sidebar.file_uploader("Upload your file",
-        type = ["pdf"])
-    if st.sidebar.button("Analyze"):
-        if df is not None:
-            raw_text = read_pdf(df)
-            st.session_state.messages.append({"role": "user", "content": raw_text})
-            st.chat_message("user").markdown(raw_text)
-            with st.chat_message("assistant"):
-                message_placeholder = st.empty()
-                result = ""
-                full_response = ""
-            
-            #create a response for user input
-            for response in client.chat.completions.create(
-                model=st.session_state["openai_model"],
-                messages=[
-                    {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state.messages
-                ],
-                stream=True,
-            ):
-                
-                #get the response from gpt model
-                result = response.choices[0].delta.content
-                if(isinstance(result, str)):
-                    full_response += result
-                
-                message_placeholder.markdown(full_response + "▌")
-
-            #add message to history
-            st.session_state.messages.append(
-            {"role": "assistant", "content": full_response})
-            #remove the ▌ thingy
-            message_placeholder.markdown(full_response)
-
-            #user_input = raw_text
-            #if(df.type == "application/pdf"):
-            #    try:
-            #        with pdfplumber.open(df) as pdf:
-            #            pages = pdf.pages[0]
-            #            st.write(pages.extract_text())
-            #    except:
-            #        st.write("None")
-
-    #df_list = tabula.read_pdf(df, pages="all")
-    #if(df_list):
-    #    df = df_list[0]
-    #    print(df.head())
-
-
+# Add an "About" section at the bottom of the app
+st.markdown("---")
+st.markdown("### About")
+st.markdown("Alpaca 3 is a PDF analysis tool that allows you to upload PDFs and ask questions about their content. "
+            "Powered by a backend AI system, it provides insights based on the document data and your queries.")
