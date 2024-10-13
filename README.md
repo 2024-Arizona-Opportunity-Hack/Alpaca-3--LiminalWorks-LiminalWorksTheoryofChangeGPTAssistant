@@ -7,7 +7,7 @@
 # Team Members
 ### Justin Lee
 - [Github](https://github.com/justinzl1)
-- [LinkedIn](https://linkedin.com/in/justinzl1)
+- [LinkedIn](https://www.linkedin.com/in/justinzl1)
   
 ### Dheeraj Kallakuri
 - [Github](https://github.com/dheerajkallakuri)
