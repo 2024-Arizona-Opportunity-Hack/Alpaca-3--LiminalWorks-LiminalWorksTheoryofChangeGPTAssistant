@@ -1,7 +1,7 @@
 
 # Team-24: Alpaca 3
 
-[Demo Video]((https://youtu.be/UY_XMJl0DD4))</br>
+[Demo Video](https://youtu.be/UY_XMJl0DD4)</br>
 [Devpost](devpost.com)
 
 # Team Members
