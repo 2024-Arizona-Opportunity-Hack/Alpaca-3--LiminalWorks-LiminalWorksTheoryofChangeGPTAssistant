@@ -38,9 +38,9 @@ if authentication_status:
     #working_dir = os.path.dirname(os.path.abspath(__file__))
     #config_path = os.path.join(working_dir, "config.json")
     #print(f"Config Path: {config_path}")
-    config_data = st.secrets["key"]
+    #config_data = st.secrets["key"]
     client = OpenAI(
-        api_key = config_data["OPENAI_API_KEY"]
+        api_key = st.secrets["key"]
     )
 
     if "openai_model" not in st.session_state:
