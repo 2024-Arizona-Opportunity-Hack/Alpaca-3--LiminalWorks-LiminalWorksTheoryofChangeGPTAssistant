@@ -36,7 +36,8 @@ if authentication_status:
 
     #config api key
     working_dir = os.path.dirname(os.path.abspath(__file__))
-    config_data = json.load(open(f"{working_dir}/config.json"))
+    config_path = os.path.join(working_dir, "config.json")
+    config_data = json.load(open(config_path))
     client = OpenAI(
         api_key = config_data["OPENAI_API_KEY"]
     )
