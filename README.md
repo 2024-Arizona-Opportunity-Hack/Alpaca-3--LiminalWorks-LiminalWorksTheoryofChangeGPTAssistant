@@ -65,7 +65,7 @@ creating programs with these features. The system uses multiple technologies in 
 1. MongoDB NoSQL Database
 2. Natural Language Processing (NLP) and Artificial Intelligence (AI) techniques like Retrieval Augmented Generation (RAG) model
 3. Open source python frontend framework like Streamlit
-4. Web Scraping technologies and libraries BeautifulSoup
+4. Web Scraping technologies and libraries like BeautifulSoup
    
 
 
