@@ -6,15 +6,19 @@
 
 ## Team Members
 Justin Lee</br>
+
 - [Github](https://github.com/justinzl1)
 - [LinkedIn]()
 Dheeraj Kallakuri</br>
+
 - [Github](https://github.com/dheerajkallakuri)
 - [LinkedIn](https://www.linkedin.com/in/dheerajkallakuri/)
 Ramy Bagaghayou</br>
+
 - [Github](https://github.com/mcaramy)
 - [LinkedIn](https://www.linkedin.com/in/rbabagha/)
 Umang Rajnikant Bid
+
 - [Github](https://github.com/UmangBid)
 - [LinkedIn](https://www.linkedin.com/in/umang-bid/)
 
