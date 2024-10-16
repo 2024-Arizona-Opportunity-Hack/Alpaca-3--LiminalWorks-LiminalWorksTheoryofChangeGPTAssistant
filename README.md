@@ -60,6 +60,7 @@ will let it through. If not, the AI responds with how the query is not relevant 
 │
 ├── src
 │   └── app.py
+│── requirements.txt
 └── README.md
 ```
 # Folder Description
@@ -90,10 +91,24 @@ Ensure you have the following API keys set up for the project:
 - **MongoDB API Key**: Necessary for database connectivity and operations with MongoDB.
  
     
-# Run the Project
+### Run the Project
 
-- Execute `python backend/main.py` to start the Flask backend, which handles inputs from the frontend. The application will be accessible at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
-- Run `streamlit run app.py` to launch the frontend interface using Streamlit, where users can provide inputs. The application will be available at [http://localhost:8501](http://localhost:8501).
+1. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Start the Flask backend by executing:
+   ```bash
+   python backend/main.py
+   ```
+   This will handle inputs from the frontend, and the application will be accessible at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
+
+3. Launch the frontend interface using Streamlit:
+   ```bash
+   streamlit run src/app.py
+   ```
+   This will start the frontend where users can input data, accessible at [http://localhost:8501](http://localhost:8501).
 
 
 
