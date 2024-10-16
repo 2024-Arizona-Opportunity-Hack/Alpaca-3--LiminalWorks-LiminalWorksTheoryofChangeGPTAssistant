@@ -28,7 +28,7 @@ of change is significantly reduced, allowing for volunteers and employees to all
 
 ## Introduction
 
-Alpaca 3 is an AI model trained on data about theory of change (TOC), what makes a good TIC, and how to craft a TOC. Users are able to 
+Alpaca 3 is an AI model trained on data about theory of change (ToC), what makes a good ToC, and how to craft a ToC. Users are able to 
 directly ask Alpaca 3 questions they have, or they can upload pdfs that the AI will scan and respond to. </br>
 
 <img width="1438" alt="Screenshot 2024-10-13 at 2 25 35 PM" src="https://github.com/user-attachments/assets/711dc571-671e-41f2-acbf-c54ee710813e">
