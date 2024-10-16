@@ -22,14 +22,14 @@
 
 ## Problem Statement
 
-Liminal Works currently enlists the help of its volunteers to develop theories of change for grassroot activists and organizations. 
+Liminal Works currently enlists the help of its volunteers to develop theories of change for grassroots activists and organizations. 
 This task can be very time-consuming and subjective. Using AI to facilitate this process, the time spent developing theories
 of change is significantly reduced, allowing for volunteers and employees to allocate their time to more important tasks.
 
 ## Introduction
 
-Alpaca 3 is an AI model trained on data about theory of change (ToC), what makes a good ToC, and how to craft a ToC. Users are able to 
-directly ask Alpaca 3 questions they have, or they can upload pdfs that the AI will scan and respond to. </br>
+Alpaca 3 is an AI model trained on data about the theory of change (ToC), what makes a good ToC, and how to craft a ToC. Users are able to 
+directly ask Alpaca 3 questions they have, or they can upload PDFs that the AI will scan and respond to. </br>
 
 <img width="1438" alt="Screenshot 2024-10-13 at 2 25 35 PM" src="https://github.com/user-attachments/assets/711dc571-671e-41f2-acbf-c54ee710813e">
 
@@ -152,6 +152,7 @@ Ensure you have Python installed and set up on your machine. You will also need 
 - Hosting the application on **AWS** for scalability and better availability.
 - Adding additional features and design elements in the chat interface to improve user experience.
 - Expanding document support to accept other file types beyond PDFs.
+- Creating a login through a Google account for volunteers at Liminal Works and Benefrices, and storing their conversations with Alpaca3. 
 
 ### AI Assistant:
 - Fine-tuning the assistant using models such as **ChatGPT**, **Gemini**, or **Llama**. Note that fine-tuning costs may vary based on the model chosen.
