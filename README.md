@@ -5,22 +5,13 @@
 [Devpost](devpost.com)
 
 # Team Members
-### Justin Lee
-- [Github](https://github.com/justinzl1)
-- [LinkedIn](https://www.linkedin.com/in/justinzl)
+#### Justin Lee | [Github](https://github.com/justinzl1) | [LinkedIn](https://www.linkedin.com/in/justinzl)
   
-### Dheeraj Kallakuri
-- [Github](https://github.com/dheerajkallakuri)
-- [LinkedIn](https://www.linkedin.com/in/dheerajkallakuri/)
+#### Dheeraj Kallakuri | [Github](https://github.com/dheerajkallakuri) | [LinkedIn](https://www.linkedin.com/in/dheerajkallakuri/)
 
-### Ramy Bagaghayou
-- [Github](https://github.com/mcaramy)
-- [LinkedIn](https://www.linkedin.com/in/rbabagha/)
+#### Ramy Bagaghayou | [Github](https://github.com/mcaramy) | [LinkedIn](https://www.linkedin.com/in/rbabagha/)
 
-### Umang Rajnikant Bid
-- [Github](https://github.com/UmangBid)
-- [LinkedIn](https://www.linkedin.com/in/umang-bid/)
-
+#### Umang Rajnikant Bid | [Github](https://github.com/UmangBid) | [LinkedIn](https://www.linkedin.com/in/umang-bid/)
 
 # Info
 
@@ -40,8 +31,6 @@ directly ask Alpaca 3 questions they have, or they can upload pdfs that the AI w
 
 <img width="1438" alt="Screenshot 2024-10-13 at 2 25 35 PM" src="https://github.com/user-attachments/assets/711dc571-671e-41f2-acbf-c54ee710813e">
 
-
-
 # How it works
 
 The user writes text or uploads a pdf, and this input is then sent as a query to the API gpt that generates a response. 
@@ -49,6 +38,63 @@ The response is filtered through a database containing data about TOC. If the re
 will let it through. If not, the AI responds with how the query is not relevant to TOC. Every conversation is collected and stored in the database for future reference and training where it learns from past conversations.
 
 <img width="3136" alt="Flow Map" src="https://github.com/user-attachments/assets/52570d3a-185b-4f86-861a-5573b8be203b">
+
+
+# File Structure
+```
+.
+├── backend
+│   ├── good data folder
+│   ├── bad data folder
+│   ├── answers.pdf
+│   ├── output.pdf
+│   ├── standard.pdf
+│   ├── vector_index.faiss
+│   ├── metadata.pkl
+│   ├── createpdf.py
+│   ├── fetchData.py
+│   ├── main.py
+│   ├── maindb.py
+│   ├── mongoData.py
+│   └── pdfcontentreader.py
+│
+├── src
+│   └── app.py
+└── README.md
+```
+# Folder Description
+- **backend/**: Contains data files, scripts, and modules related to backend processing.
+  - **good data folder**: Folder contains pdf which talks about good examples of theory of change.
+  - **bad data folder**: Folder contains pdf which talks about bad examples of theory of change.
+  - **answers.pdf**: A sample Q/A collected by Liminal Works Volunteer.
+  - **output.pdf**: A pdf file which has Q/A and some feedback of each question of answers.pdf
+  - **standard.pdf**: Contains 17 questions asked by Liminal Works Volunteer.
+  - **vector_index.faiss**: File for storing FAISS vector index data.
+  - **metadata.pkl**: Pickle file for storing metadata.
+  - **createpdf.py**: Script for creating PDF files.
+  - **fetchData.py**: Script for fetching data from sources.
+  - **main.py**: Main entry point for backend operations.
+  - **maindb.py**: Database management script.
+  - **mongoData.py**: Script for handling MongoDB operations.
+  - **pdfcontentreader.py**: Script for reading content from PDFs.
+
+- **src/**: Contains the main application file.
+  - **app.py**: Main application logic of frontend.
+
+# Required API Keys
+
+Ensure you have the following API keys set up for the project:
+
+- **OpenAI API Key**: Needed for accessing OpenAI's services.
+- **Gemini API Key**: Required for interacting with Gemini's API.
+- **MongoDB API Key**: Necessary for database connectivity and operations with MongoDB.
+ 
+    
+# Run the Project
+
+- Execute `python backend/main.py` to start the Flask backend, which handles inputs from the frontend. The application will be accessible at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
+- Run `streamlit run app.py` to launch the frontend interface using Streamlit, where users can provide inputs. The application will be available at [http://localhost:8501](http://localhost:8501).
+
 
 
 
