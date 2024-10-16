@@ -1,7 +1,5 @@
 import requests
 import streamlit as st
-import pdfplumber
-
 
 def analyze_pdf_via_api(file):
     # Send the file to the Flask backend API

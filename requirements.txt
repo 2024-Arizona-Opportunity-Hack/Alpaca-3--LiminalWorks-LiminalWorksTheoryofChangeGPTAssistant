@@ -1,0 +1,14 @@
+PyPDF2
+sentence-transformers
+faiss-cpu
+numpy
+pandas
+flask
+pdfplumber
+reportlab
+openai
+google-generativeai
+pymongo
+scikit-learn
+requests
+streamlit
