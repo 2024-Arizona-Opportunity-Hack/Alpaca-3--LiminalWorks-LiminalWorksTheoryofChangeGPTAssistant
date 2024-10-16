@@ -89,28 +89,74 @@ Ensure you have the following API keys set up for the project:
 - **OpenAI API Key**: Needed for accessing OpenAI's services.
 - **Gemini API Key**: Required for interacting with Gemini's API.
 - **MongoDB API Key**: Necessary for database connectivity and operations with MongoDB.
- 
-    
-## Run the Project
 
-1. Install the required dependencies:
+
+## Installation and Setup
+
+### Prerequisites
+Ensure you have Python installed and set up on your machine. You will also need the following API keys:
+- OpenAI API Key
+- Google Gemini API Key
+- MongoDB API Key
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd <project-directory>
+   ```
+3. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
    ```
+ 
+### Run the Project
 
-2. Start the Flask backend by executing:
+1. Start the Flask backend by executing:
    ```bash
    python backend/main.py
    ```
    This will handle inputs from the frontend, and the application will be accessible at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
 
-3. Launch the frontend interface using Streamlit:
+2. Launch the frontend interface using Streamlit:
    ```bash
    streamlit run src/app.py
    ```
    This will start the frontend where users can input data, accessible at [http://localhost:8501](http://localhost:8501).
 
+## Features
 
+### Current Features
+- **GPT-3.5 Turbo**: Utilized for generating responses during chat interactions.
+- **Google Gemini**: Used for summarizing large document chunks effectively.
+- **PDF Generation**: A suggestion file (`output.pdf`) is generated and saved in the `backend` folder.
+- **Session Management**: Previous chat histories will not be retained and will reset upon refreshing the page.
+- **MongoDB Storage**: All queries and responses related to the theory of change are stored in MongoDB for further analysis.
+- **RAG Implementation**: Hallucinations are minimized using Retrieval-Augmented Generation (RAG) techniques.
+- **API Keys Required**:
+  - **OpenAI API Key**: For accessing GPT-3.5 Turbo services.
+  - **Gemini API Key**: For document summarization.
+  - **MongoDB API Key**: For storing and managing chat data.
+ 
+## Enhancements
+
+### Frontend and Backend:
+- Standardizing the PDF parsing process for better consistency and accuracy.
+- Adding a **Download PDF** button for easy access to generated documents.
+- Implementing a feature to display **previous chat history** even after refreshing the page.
+- Hosting the application on **AWS** for scalability and better availability.
+- Adding additional features and design elements in the chat interface to improve user experience.
+- Expanding document support to accept other file types beyond PDFs.
+
+### AI Assistant:
+- Fine-tuning the assistant using models such as **ChatGPT**, **Gemini**, or **Llama**. Note that fine-tuning costs may vary based on the model chosen.
+- Implementing a process for fine-tuning the models at regular intervals to maintain accuracy and relevance.
+
+### Code Review
+- Refining the codebase to improve efficiency, readability, and maintainability.
 
 
 ## Challenges we ran into
@@ -134,5 +180,3 @@ creating programs with these features. The system uses multiple technologies in 
 3. Open source python frontend framework like Streamlit
 4. Web Scraping technologies and libraries like BeautifulSoup
 5. Collaboration between teammates and getting things done in a time crunch
-   
-
