@@ -5,8 +5,8 @@ import mongodData
 
 pdf_file_path = 'standard.pdf'
 
-tocpdfprompt="Validate response based on theory of change rules; suggest clarification/question. in 30 words "
-ntocpdfprompt="Summarize if content follows rules of with 'theory of change' concept else deny"
+tocpdfprompt="Check if response aligns with Theory of Change principles (10 words) and suggest a clarification/question if unclear (40 words). "
+ntocpdfprompt="Summarize if content follows rules of 'theory of change' concept else deny"
 
 # Function to extract sections from the PDF based on numeric headings and uppercase words
 def extract_sections_from_pdf(file_path):
@@ -110,8 +110,12 @@ def check_type_of_pdf(raw_text):
     query=[]
     if rquestions[0] in text:
         ranswers = extract_answer_from_pdf(text)
-        for question,ranswer in zip(rquestions,ranswers):
-            rpt=tocpdfprompt+question+"answer:"+ranswer
+        if ranswers:
+            for question,ranswer in zip(rquestions,ranswers):
+                rpt=tocpdfprompt+question+"answer:"+ranswer
+                query.append(rpt)
+        else:
+            rpt=ntocpdfprompt+text
             query.append(rpt)
     else:
         rpt=ntocpdfprompt+text

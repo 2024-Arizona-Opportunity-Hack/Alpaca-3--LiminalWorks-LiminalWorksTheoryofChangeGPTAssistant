@@ -2,12 +2,6 @@ import requests
 import streamlit as st
 import pdfplumber
 
-def read_pdf(file):
-    text = ""
-    with pdfplumber.open(file) as pdf:
-        for page in pdf.pages:
-            text += page.extract_text()
-    return text
 
 def analyze_pdf_via_api(file):
     # Send the file to the Flask backend API
@@ -52,7 +46,7 @@ if st.sidebar.button("Analyze"):
                     st.chat_message(message["role"]).markdown(message["content"])
 
 # User question input
-user_question = st.text_input("Ask a question about the PDF content:")
+user_question = st.text_input("Ask a question about the Theory of Change content:")
 
 # Button to trigger user question analysis
 if st.button("Submit Question"):

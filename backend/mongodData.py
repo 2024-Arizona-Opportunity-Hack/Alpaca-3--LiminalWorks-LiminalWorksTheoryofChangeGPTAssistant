@@ -50,7 +50,7 @@ class MongoDBHandler:
             print(f"An error occurred: {e}")
             return 0
 
-mongo_uri="YOUR_KEY"
+mongo_uri="YOUR_CONNECTION_STRING"
 db_name= "theory_of_change_db"
 collection_name= "toc_data"
 
@@ -64,15 +64,14 @@ def fetch_all_documents():
 
 # Function to use MongoDBHandler to update a document
 def insert_data_to_database(data):
-    mongo_uri = "YOUR_KEY"
+    mongo_uri = "YOUR_CONNECTION_STRING"
     db_name = "theory_of_change_db"
     
     # Create a MongoDB client and connect to the database
     mongo_handler = MongoDBHandler(mongo_uri, db_name)
     mongo_handler.connect()
 
-    # Get the collection (make sure 'toc_data' is the correct collection name)
-    collection = mongo_handler.db.toc_data  # Assuming mongo_handler has a db attribute
+    collection = mongo_handler.db.toc_data 
 
     # Insert the data into the collection
     collection.insert_one(data)
@@ -82,9 +81,10 @@ def insert_data_to_database(data):
 def create_mongo_vectordb():
     documents=fetch_all_documents()
     text=""
-    for document in documents:
-        dq=" question:"+document['query']
-        da=" answer:"+document['response']
-        text+=dq+da
+    if len(documents)>0:
+        for document in documents:
+            dq=" question:"+document['query']
+            da=" answer:"+document['response']
+            text+=dq+da
     return text
 

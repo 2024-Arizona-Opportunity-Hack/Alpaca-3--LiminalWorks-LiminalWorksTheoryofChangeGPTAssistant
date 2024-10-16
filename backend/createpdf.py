@@ -1,11 +1,10 @@
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
-tocpdfprompt="Validate response based on theory of change rules; suggest clarification/question. in 30 words "
+tocpdfprompt="Check if response aligns with Theory of Change principles (10 words) and suggest a clarification/question if unclear (40 words). "
 
 def wrap_text(text, max_width, canvas, font_name="Helvetica", font_size=12):
     """Wraps text into lines that fit within max_width."""
-    print(text)
     lines = []
     words = text.split(' ')
     current_line = ""
@@ -50,7 +49,7 @@ def create_pdf(contentarr, filename="output.pdf"):
                 parts = con.split("answer:", 1)
                 question_text = parts[0].strip()  
                 answer_text = "\n" + parts[1].strip()
-                con=question_text+answer_text
+                con=answer_text
             
             question_lines = wrap_text(con, width - 144, canva)  # 72px padding on both sides
             for line in question_lines:

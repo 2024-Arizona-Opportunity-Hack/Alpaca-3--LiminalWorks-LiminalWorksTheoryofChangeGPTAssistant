@@ -12,11 +12,13 @@ from createpdf import create_pdf
 from pdfcontentreader import check_type_of_pdf
 import maindb
 import mongodData
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-api_key = "YOUR_KEY"
-gapi_key="YOUR_KEY"
+api_key = "YOUR_API_KEY"
+gapi_key="YOUR_API_KEY"
 openai.api_key=api_key
 # Initialize the embedding model
 model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -30,6 +32,18 @@ def load_vector_db(index_file='vector_index.faiss', metadata_file='metadata.pkl'
         metadata = pickle.load(f)
     return index, metadata
 
+def extract_relevant_sentences(text, question, top_n=2):
+    sentences = text.split(". ")
+    vectorizer = TfidfVectorizer().fit_transform([question] + sentences)
+    vectors = vectorizer.toarray()
+    
+    # Calculate cosine similarity between the question and sentences
+    cosine_similarities = cosine_similarity([vectors[0]], vectors[1:])[0]
+    # Get the indices of the top n most similar sentences
+    top_indices = cosine_similarities.argsort()[-top_n:][::-1]
+    # Concatenate these sentences as the relevant part
+    return ". ".join([sentences[idx] for idx in top_indices])
+
 # Query the vector database
 def query_vector_db(index, metadata, question, k=2):
     # Encode the question
@@ -37,7 +51,9 @@ def query_vector_db(index, metadata, question, k=2):
     # Search the FAISS index
     _, indices = index.search(np.array(question_embedding), k=k)
     # Retrieve and return the closest text chunks
-    results = [metadata[idx]['text'] for idx in indices[0]]
+    # results = [metadata[idx]['text'] for idx in indices[0]]
+    results = [extract_relevant_sentences(metadata[idx]['text'], question, 5) for idx in indices[0]]
+    print(len(results[0]))
     return results
 
 def extract_text_from_pdf(pdf_path):
@@ -81,11 +97,12 @@ def get_gpt_ans(retrieved_chunks, user_question):
     response = response.choices[0].message.content
     return response
 
-maindb.save_vector_db()
-
-index, metadata = load_vector_db()
+# maindb.save_vector_db()
+# index, metadata = load_vector_db()
 
 def analyze_question(question):
+    maindb.save_vector_db()
+    index, metadata = load_vector_db()
     if question:
         user_question="check if the given "+question+" is related to Theory of Change. If not deny politely."
         retrieved_chunks = query_vector_db(index, metadata, user_question,5)
@@ -100,14 +117,16 @@ def analyze_question(question):
 
 # Main function to demonstrate querying
 def analyze_pdf(raw_text):
-   
+    maindb.save_vector_db()
+    index, metadata = load_vector_db()
+
     queries=check_type_of_pdf(raw_text)
 
     if len(queries) > 1:
         contentarr=[]
         for query in queries:
             user_question=query
-            retrieved_chunks = query_vector_db(index, metadata, user_question,2)
+            retrieved_chunks = query_vector_db(index, metadata, user_question,5)
             res=get_gpt_ans(retrieved_chunks, user_question)
             data = {
                 "query": user_question,
