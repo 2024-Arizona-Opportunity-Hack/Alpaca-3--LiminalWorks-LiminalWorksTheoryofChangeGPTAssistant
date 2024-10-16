@@ -1,8 +1,15 @@
 
-## Team-24: Alpaca 3
+## Team-24: Alpaca 3: A Custom GPT for Liminal Works
 
-[Demo Video](https://youtu.be/UY_XMJl0DD4)</br>
-[Devpost](devpost.com)
+## Demo Video
+<p>
+    <a href="https://youtu.be/UY_XMJl0DD4" target="_blank">
+        <img src="https://img.youtube.com/vi/UY_XMJl0DD4/0.jpg" alt="Alpaca 3 Demo Video">
+    </a>
+</p>
+<p>Click the image above or <a href="https://youtu.be/UY_XMJl0DD4" target="_blank">Video Link</a> to watch the video.</p>
+
+[Devpost](https://devpost.com/software/opportunity-hack-2024) | [Our Slack](https://opportunity-hack.slack.com/app_redirect?channel=alpaca_3_laminal_works) | [About Liminal Works](https://www.liminal-works.org/about)</br>
 
 ## Team Members
 #### Justin Lee | [Github](https://github.com/justinzl1) | [LinkedIn](https://www.linkedin.com/in/justinzl)
@@ -12,11 +19,6 @@
 #### Ramy Bagaghayou | [Github](https://github.com/mcaramy) | [LinkedIn](https://www.linkedin.com/in/rbabagha/)
 
 #### Umang Rajnikant Bid | [Github](https://github.com/UmangBid) | [LinkedIn](https://www.linkedin.com/in/umang-bid/)
-
-## Info
-
-[Our Slack](https://opportunity-hack.slack.com/app_redirect?channel=alpaca_3_laminal_works)</br>
-[About Liminal Works](https://www.liminal-works.org/about)</br>
 
 ## Problem Statement
 
